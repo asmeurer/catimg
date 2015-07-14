@@ -9,7 +9,7 @@ from setuptools import setup
 setup(
     name='catimg',
     version='1.0',
-    description='''Print an image of a cat from imgur to iTerm2..''',
+    description='''Print an image of a cat from imgur to iTerm2.''',
     author='Aaron Meurer',
     author_email='asmeurer@gmail.com',
     url='https://github.com/asmeurer/catimg',
