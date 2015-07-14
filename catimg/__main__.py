@@ -37,6 +37,7 @@ def main():
     if not args.files:
         if args.update_cache:
             update_img_cache(verbose=args.verbose)
+            return
         image = get_random_image(verbose=args.verbose)
         if not image and args.download:
             print("No cat images found, downloading...")
