@@ -14,7 +14,7 @@ setup(
     author_email='asmeurer@gmail.com',
     url='https://github.com/asmeurer/catimg',
     packages=['catimg'],
-    package_data={'catimg.tests': ['aloha_cat.png']},
+    package_data={'catimg.tests': ['aloha_cat.png'], 'catimg': ['README.md']},
     long_description=open("README.md").read(),
     entry_points={'console_scripts': [ 'catimg = catimg.__main__:main']},
     install_requires=[
