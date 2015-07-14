@@ -56,7 +56,7 @@ def update_img_cache(verbose=False):
     except ImgurClientError as e:
         print("Error: Could not get new images (%s)" % e, file=sys.stderr)
 
-def get_random_image(n=1, delete=True, verbose=False):
+def get_random_image(n=3, delete=True, verbose=False):
     """
     Get a random image, which hasn't been used more than n times. Usages are
     stored on disk.
