@@ -16,19 +16,34 @@ License: MIT
 import sys
 import argparse
 
-from imgurpython import ImgurClient
-from imgurpython.helpers.error import ImgurClientError
+from .iterm2 import iterm2_display_image_file
+from .imgur import update_img_cache, get_random_image
 
-from catimg.iterm2 import iterm2_display_image_file
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--files', nargs='+', metavar='IMAGES',
+    parser.add_argument('--files', nargs='+', metavar='IMAGES', default=(),
                    help='Files to display')
+    parser.add_argument('--verbose', action='store_true', help="Show verbose output")
+    parser.add_argument('--update-cache', action='store_true', help="Update the image cache and exit")
+    parser.add_argument('--no-download', action='store_false', dest='download', default=True, help="Don't download anything from the internet")
+    parser.add_argument('--no-delete', action='store_false', dest='delete',
+    default=True, help="Don't delete old images")
 
     args = parser.parse_args()
+
     for img in args.files:
         iterm2_display_image_file(img)
         print()
+    if not args.files:
+        if args.update_cache:
+            update_img_cache(verbose=args.verbose)
+        image = get_random_image(verbose=args.verbose)
+        if not image and args.download:
+            print("No cat images found, downloading...")
+            update_img_cache(verbose=args.verbose)
+            image = get_random_image(delete=args.delete, verbose=args.verbose)
+        if image:
+            iterm2_display_image_file(image)
 
 if __name__ == '__main__':
     sys.exit(main())
