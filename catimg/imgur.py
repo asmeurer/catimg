@@ -78,7 +78,7 @@ def get_random_image(n=3, delete=True, verbose=False):
         print("Usages:", usages)
 
     files = os.listdir(IMG_CACHE)
-    usable_files = {f for f in files if usages[f] <= n}
+    usable_files = {f for f in files if usages[f] < n}
     if verbose:
         print("Usable files:", usable_files)
 
