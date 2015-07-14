@@ -100,7 +100,7 @@ def get_random_image(n=3, delete=True, verbose=False):
 
     if verbose:
         print("New usages:", usages)
-        print("Writing usages to %s", USAGES_FILE)
+        print("Writing usages to %s" % USAGES_FILE)
     with open(USAGES_FILE, 'w') as f:
         f.write('\n'.join(' '.join([img, str(usages[img])]) for img in usages))
 
