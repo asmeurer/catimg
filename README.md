@@ -11,6 +11,19 @@ anything. We do filter out images that are tagged NSFW, but there are no
 guarantees that you won't see something you wish you hadn't. Use at your own
 risk.
 
+# Installation
+
+catimg depends on requests, imgurpython, and iTerm2.  It depends on Python 3
+(it will not work in Python 2).
+
+The easiest way to install it is with pip
+
+    pip install catimg
+
+or conda
+
+    conda install -c asmeurer catimg
+
 # Example
 
 ![](example.png)
