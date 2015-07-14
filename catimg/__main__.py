@@ -16,7 +16,7 @@ import argparse
 from imgurpython import ImgurClient
 from imgurpython.helpers.error import ImgurClientError
 
-from catimg.catimg import iterm2_display_image_file
+from catimg.iterm2 import iterm2_display_image_file
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--files', nargs='+', metavar='IMAGES',

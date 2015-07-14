@@ -1,1 +1,1 @@
-from .catimg import *
+from .iterm2 import *
