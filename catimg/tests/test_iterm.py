@@ -11,6 +11,7 @@ def test_iterm2_image_bytes():
 def test_iterm2_display_image_file():
     curdir = os.path.split(__file__)[0]
     iterm2_display_image_file(os.path.join(curdir, 'aloha_cat.png'))
+    print()
 
 if __name__ == '__main__':
     test_iterm2_display_image_file()
