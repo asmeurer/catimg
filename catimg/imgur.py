@@ -65,6 +65,8 @@ def get_random_image(n=3, delete=True, verbose=False):
 
     Returns the file path, or None if no files could be found.
     """
+    if verbose:
+        print("Max usage:", n)
     usages = defaultdict(int)
     os.makedirs(IMG_CACHE, exist_ok=True)
     if os.path.exists(USAGES_FILE):
