@@ -3,6 +3,7 @@ import os
 import random
 
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 
 from requests import Session
 
@@ -20,14 +21,24 @@ USAGES_FILE = os.path.join(CATIMG_DIR, 'usages')
 IMG_CACHE = os.path.join(CATIMG_DIR, 'cache')
 # client = ImgurClient(CLIENT_ID, CLIENT_SECRET)
 
+def _download_and_write(item, path, session, verbose=False):
+    print("Downloading %s (%s)" % (item.link, human_bytes(item.size)))
+    r = session.get(item.link)
+
+    if verbose:
+        print("Writing %s" % path)
+    with open(path, 'wb') as f:
+        f.write(r.content)
+
 def update_img_cache(verbose=False):
     try:
         client = ImgurClient(CLIENT_ID, CLIENT_SECRET)
         if verbose:
             print("Getting Imgur images")
         items = client.gallery_tag('cat')
-        s = Session()
+        session = Session()
         os.makedirs(IMG_CACHE, exist_ok=True)
+        to_download = {}
         for item in items.items:
             fn = item.link.rsplit('/', 1)[1]
             path = os.path.join(IMG_CACHE, fn)
@@ -44,14 +55,15 @@ def update_img_cache(verbose=False):
                 if verbose:
                     print("%s already exists, skipping" % path)
                 continue
+            to_download[item] = path
 
-            print("Downloading %s (%s)" % (item.link, human_bytes(item.size)))
-            r = s.get(item.link)
+        with ThreadPoolExecutor(10) as executor:
+            for item, path in to_download.items():
+                executor.submit(_download_and_write, item, path, session,
+            verbose=verbose)
 
-            if verbose:
-                print("Writing %s" % path)
-            with open(path, 'wb') as f:
-                f.write(r.content)
+
+
 
     except ImgurClientError as e:
         print("Error: Could not get new images (%s)" % e, file=sys.stderr)
