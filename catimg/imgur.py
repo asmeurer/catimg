@@ -19,6 +19,7 @@ CLIENT_SECRET = "d0e87b8e5ec48cb345380f6fbcaf2ff70167755c"
 CATIMG_DIR = os.path.expanduser('~/.catimg')
 USAGES_FILE = os.path.join(CATIMG_DIR, 'usages')
 IMG_CACHE = os.path.join(CATIMG_DIR, 'cache')
+LOCK_PATH = os.path.join(CATIMG_DIR, 'lock')
 # client = ImgurClient(CLIENT_ID, CLIENT_SECRET)
 
 def _download_and_write(item, path, session, verbose=False):
@@ -31,6 +32,13 @@ def _download_and_write(item, path, session, verbose=False):
         f.write(r.content)
 
 def update_img_cache(verbose=False):
+    try:
+        os.makedirs(LOCK_PATH)
+    except OSError:
+        if verbose:
+            print("Another process is downloading cat images.")
+        return
+
     try:
         client = ImgurClient(CLIENT_ID, CLIENT_SECRET)
         if verbose:
@@ -67,6 +75,11 @@ def update_img_cache(verbose=False):
 
     except ImgurClientError as e:
         print("Error: Could not get new images (%s)" % e, file=sys.stderr)
+    finally:
+        try:
+            os.rmdir(LOCK_PATH)
+        except FileNotFoundError:
+            pass
 
 def get_random_image(n=3, delete=True, verbose=False):
     """
