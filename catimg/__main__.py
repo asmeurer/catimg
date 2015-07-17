@@ -45,6 +45,7 @@ def main():
             image = get_random_image(delete=args.delete, verbose=args.verbose)
         if image:
             iterm2_display_image_file(image)
+            print()
 
 if __name__ == '__main__':
     sys.exit(main())
