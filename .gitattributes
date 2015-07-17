@@ -1,2 +1,3 @@
 conda/_version.py export-subst
 *.py    diff=python
+catimg/_version.py export-subst
