@@ -16,4 +16,4 @@ License: MIT
 from .iterm2 import *
 from .imgur import *
 
-__version__ = '1.0.1'
+__version__ = '1.0.2'
