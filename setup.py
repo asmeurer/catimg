@@ -16,7 +16,7 @@ setup(
     url='https://github.com/asmeurer/catimg',
     packages=['catimg'],
     package_data={'catimg.tests': ['aloha_cat.png']},
-    long_description=catimg.__main__.__doc__,
+    long_description=catimg.__doc__,
     entry_points={'console_scripts': [ 'catimg = catimg.__main__:main']},
     install_requires=[
         'requests',
