@@ -5,6 +5,7 @@
 
 - Grammar fix.
 - Correctly print newline after the cat image.
+- Add __version__.
 
 1.0.1
 -----
