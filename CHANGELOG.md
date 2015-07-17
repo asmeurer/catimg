@@ -1,7 +1,11 @@
-1.0.1
+1.0.3
 -----
+
+- Fix pip install when requests and imgurpython aren't already installed.
+- Use versioneer.
+
 1.0.2
----
+-----
 
 - Grammar fix.
 - Correctly print newline after the cat image.
