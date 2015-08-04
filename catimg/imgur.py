@@ -70,9 +70,6 @@ def update_img_cache(verbose=False):
                 executor.submit(_download_and_write, item, path, session,
             verbose=verbose)
 
-
-
-
     except ImgurClientError as e:
         print("Error: Could not get new images (%s)" % e, file=sys.stderr)
     finally:
