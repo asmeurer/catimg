@@ -15,7 +15,7 @@ setup(
     author='Aaron Meurer',
     author_email='asmeurer@gmail.com',
     url='https://github.com/asmeurer/catimg',
-    packages=['catimg'],
+    packages=['catimg', 'catimg.tests'],
     package_data={'catimg.tests': ['aloha_cat.png']},
     long_description="""
 catimg
