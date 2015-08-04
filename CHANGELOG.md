@@ -1,3 +1,9 @@
+1.0.4
+-----
+
+- Add zip_safe=False to setup.py
+- Install the tests
+
 1.0.3
 -----
 
