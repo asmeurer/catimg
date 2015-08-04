@@ -1,11 +1,11 @@
 package:
   name: catimg
-  version: "1.0.3"
+  version: "1.0.4"
 
 source:
-  fn: catimg-1.0.3.tar.gz
-  url: https://pypi.python.org/packages/source/c/catimg/catimg-1.0.3.tar.gz
-  md5: 6e04f2117187a7041e867e1d8861a9d6
+  fn: catimg-1.0.4.tar.gz
+  url: https://pypi.python.org/packages/source/c/catimg/catimg-1.0.4.tar.gz
+  md5: 34a81e2f001d2dece4ee45850ccf013d
 #  patches:
    # List any patch files here
    # - fix.patch
@@ -43,6 +43,7 @@ test:
   # Python imports
   imports:
     - catimg
+    - catimg.tests
 
   commands:
     # You can put test commands to be run here.  Use this to test that the
