@@ -43,4 +43,5 @@ License: MIT
         'Operating System :: MacOS :: MacOS X',
         'Programming Language :: Python :: 3',
         ],
+    zip_safe=False,
 )
