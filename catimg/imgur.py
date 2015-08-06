@@ -1,6 +1,7 @@
 import sys
 import os
 import random
+import time
 
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
@@ -20,6 +21,7 @@ CATIMG_DIR = os.path.expanduser('~/.catimg')
 USAGES_FILE = os.path.join(CATIMG_DIR, 'usages')
 IMG_CACHE = os.path.join(CATIMG_DIR, 'cache')
 LOCK_PATH = os.path.join(CATIMG_DIR, 'lock')
+RETRIES = 10
 # client = ImgurClient(CLIENT_ID, CLIENT_SECRET)
 
 def _download_and_write(item, path, session, verbose=False):
@@ -87,43 +89,62 @@ def get_random_image(n=3, delete=True, verbose=False):
 
     Returns the file path, or None if no files could be found.
     """
-    if verbose:
-        print("Max usage:", n)
-    usages = defaultdict(int)
-    os.makedirs(IMG_CACHE, exist_ok=True)
-    if os.path.exists(USAGES_FILE):
-        with open(USAGES_FILE, 'r') as f:
-            for line in f.read().splitlines():
-                usages.update({img: int(uses) for img, uses in [line.split()]})
-
-    if verbose:
-        print("Usages:", usages)
-
-    files = os.listdir(IMG_CACHE)
-    usable_files = {f for f in files if usages[f] < n}
-    if verbose:
-        print("Usable files:", usable_files)
-
-    if not usable_files:
-        return None
-
-    random_file = random.choice(list(usable_files))
-    if verbose:
-        print("Random file:", random_file)
-    usages[random_file] += 1
-
-    if delete:
-        # Shouldn't delete the random_file
-        unusable_files = set(files) - usable_files
-        for f in unusable_files:
+    for i in range(RETRIES):
+        try:
+            os.makedirs(LOCK_PATH)
+            break
+        except OSError:
             if verbose:
-                print("Removing %s" % os.path.join(IMG_CACHE, f))
-            os.remove(os.path.join(IMG_CACHE, f))
+                print("Another process is getting a cat image. Retrying in %s milliseconds." % 2**i*10)
+                time.sleep(2**i/100)
+    else:
+        if verbose:
+            print("Could not get lock after %s retries. Giving up." % RETRIES)
+        return
 
-    if verbose:
-        print("New usages:", usages)
-        print("Writing usages to %s" % USAGES_FILE)
-    with open(USAGES_FILE, 'w') as f:
-        f.write('\n'.join(' '.join([img, str(usages[img])]) for img in usages))
+    try:
+        if verbose:
+            print("Max usage:", n)
+        usages = defaultdict(int)
+        os.makedirs(IMG_CACHE, exist_ok=True)
+        if os.path.exists(USAGES_FILE):
+            with open(USAGES_FILE, 'r') as f:
+                for line in f.read().splitlines():
+                    usages.update({img: int(uses) for img, uses in [line.split()]})
 
-    return os.path.join(IMG_CACHE, random_file)
+        if verbose:
+            print("Usages:", usages)
+
+        files = os.listdir(IMG_CACHE)
+        usable_files = {f for f in files if usages[f] < n}
+        if verbose:
+            print("Usable files:", usable_files)
+
+        if not usable_files:
+            return None
+
+        random_file = random.choice(list(usable_files))
+        if verbose:
+            print("Random file:", random_file)
+        usages[random_file] += 1
+
+        if delete:
+            # Shouldn't delete the random_file
+            unusable_files = set(files) - usable_files
+            for f in unusable_files:
+                if verbose:
+                    print("Removing %s" % os.path.join(IMG_CACHE, f))
+                os.remove(os.path.join(IMG_CACHE, f))
+
+        if verbose:
+            print("New usages:", usages)
+            print("Writing usages to %s" % USAGES_FILE)
+        with open(USAGES_FILE, 'w') as f:
+            f.write('\n'.join(' '.join([img, str(usages[img])]) for img in usages))
+
+        return os.path.join(IMG_CACHE, random_file)
+    finally:
+        try:
+            os.rmdir(LOCK_PATH)
+        except FileNotFoundError:
+            pass
