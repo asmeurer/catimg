@@ -1,11 +1,11 @@
 package:
   name: catimg
-  version: "1.0.4"
+  version: "1.1"
 
 source:
-  fn: catimg-1.0.4.tar.gz
-  url: https://pypi.python.org/packages/source/c/catimg/catimg-1.0.4.tar.gz
-  md5: 34a81e2f001d2dece4ee45850ccf013d
+  fn: catimg-1.1.tar.gz
+  url: https://pypi.python.org/packages/source/c/catimg/catimg-1.1.tar.gz
+  md5: 5b5f7b3175a320e478a639e96e36a8a5
 #  patches:
    # List any patch files here
    # - fix.patch
@@ -33,17 +33,18 @@ requirements:
     - setuptools
     - requests
     - imgurpython
+    - iterm2-tools >=2.0
 
   run:
     - python
     - requests
     - imgurpython
+    - iterm2-tools >=2.0
 
 test:
   # Python imports
   imports:
     - catimg
-    - catimg.tests
 
   commands:
     # You can put test commands to be run here.  Use this to test that the
