@@ -1,3 +1,10 @@
+1.1
+---
+
+- Remove catimg.iterm2. Add dependency on iterm2-tools.
+- Lock the usages file (with retries). Usages will now be more accurate for
+  concurrent catimg runs.
+
 1.0.4
 -----
 
