@@ -36,6 +36,7 @@ License: MIT
     install_requires=[
         'requests',
         'imgurpython',
+        'iterm2-tools>=2.0',
     ],
     license="MIT",
     classifiers=[

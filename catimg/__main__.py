@@ -1,7 +1,7 @@
 import sys
 import argparse
 
-from .iterm2 import iterm2_display_image_file
+from iterm2_tools import display_image_file
 from .imgur import update_img_cache, get_random_image
 
 def main():
@@ -17,7 +17,7 @@ def main():
     args = parser.parse_args()
 
     for img in args.files:
-        iterm2_display_image_file(img)
+        display_image_file(img)
         print()
     if not args.files:
         if args.update_cache:
@@ -29,7 +29,7 @@ def main():
             update_img_cache(verbose=args.verbose)
             image = get_random_image(delete=args.delete, verbose=args.verbose)
         if image:
-            iterm2_display_image_file(image)
+            display_image_file(image)
             print()
 
 if __name__ == '__main__':

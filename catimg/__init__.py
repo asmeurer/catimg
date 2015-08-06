@@ -13,7 +13,6 @@ risk.
 License: MIT
 
 """
-from .iterm2 import *
 from .imgur import *
 
 from ._version import get_versions

@@ -14,7 +14,8 @@ risk.
 # Installation
 
 catimg depends on [requests](http://docs.python-requests.org/en/latest/),
-[imgurpython](https://github.com/Imgur/imgurpython), and
+[imgurpython](https://github.com/Imgur/imgurpython),
+[iterm2-tools](https://github.com/asmeurer/iterm2-tools) and
 [iTerm2](https://iterm2.com/).  It depends on Python 3 (it will not work in
 Python 2).
 
