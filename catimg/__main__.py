@@ -3,12 +3,14 @@ import argparse
 
 from iterm2_tools import display_image_file
 from .imgur import update_img_cache, get_random_image
+from . import __version__
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-f', '--files', nargs='+', metavar='IMAGES', default=(),
                    help='Files to display')
     parser.add_argument('-v', '--verbose', action='store_true', help="Show verbose output")
+    parser.add_argument('-V', '--version', action='version', version='catimg ' + __version__)
     parser.add_argument('--update-cache', action='store_true', help="Update the image cache and exit")
     parser.add_argument('--no-download', action='store_false', dest='download', default=True, help="Don't download anything from the internet")
     parser.add_argument('--no-delete', action='store_false', dest='delete',
