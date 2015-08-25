@@ -15,6 +15,9 @@ matrix:
 
 install: "pip install requests imgurpython 'iterm2-tools>=2.0'"
 
-script: py.test
+script:
+  - py.test
+  - catimg --help
+  - catimg --verbose
 
 sudo: false
