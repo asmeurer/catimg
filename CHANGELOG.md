@@ -2,6 +2,7 @@
 ------------
 
 - Add catimg --version
+- Enable Travis CI
 
 1.1 (2015-08-06)
 ----------------
