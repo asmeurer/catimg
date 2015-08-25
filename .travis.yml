@@ -11,11 +11,13 @@ matrix:
 
 install:
   - "python setup.py install"
+  - "pip install pyflakes"
 
 script:
   - py.test
   - catimg --help
   - catimg --update --verbose
   - catimg > /dev/null
+  - pyflakes catimg/**/!(__init__).py setup.py
 
 sudo: false
