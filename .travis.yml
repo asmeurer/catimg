@@ -7,9 +7,7 @@ python:
 
 matrix:
   allow_failures:
-    - python: "3.5.0b3"
     - python: "3.5-dev"
-    - python: "nightly"
 
 install:
   - "python setup.py install"
