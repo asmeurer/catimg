@@ -11,7 +11,8 @@ matrix:
     - python: "3.5-dev"
     - python: "nightly"
 
-install: "pip install requests imgurpython 'iterm2-tools>=2.0'"
+install:
+  - "python setup.py install"
 
 script:
   - py.test
