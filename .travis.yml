@@ -17,6 +17,7 @@ install:
 script:
   - py.test
   - catimg --help
-  - catimg --verbose
+  - catimg --update --verbose
+  - catimg > /dev/null
 
 sudo: false
