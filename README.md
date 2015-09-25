@@ -11,6 +11,11 @@ anything. I do filter out images that are tagged NSFW, but there are no
 guarantees that you won't see something you wish you hadn't. Use at your own
 risk.
 
+SECOND NOTE: This requires iTerm2 2.9 or later (i.e., at the time of this
+writing, at least the beta release). The beta release is quite stable in my
+experience. You can download it
+[here](https://www.iterm2.com/downloads.html).
+
 # Installation
 
 catimg depends on [requests](http://docs.python-requests.org/en/latest/),
