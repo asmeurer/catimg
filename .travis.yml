@@ -12,7 +12,7 @@ matrix:
 
 install:
   - "python setup.py install"
-  - "pip install pyflakes"
+  - "pip install pyflakes pytest"
 
 script:
   - shopt -s extglob globstar
