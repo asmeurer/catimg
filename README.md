@@ -2,6 +2,8 @@
 
 Print an image of a cat from imgur to iTerm2.
 
+![](example.png)
+
 Uses iTerm2's [proprietary escape codes](https://iterm2.com/images.html) and
 Imgur to display an image of a cat in your terminal.
 
@@ -31,10 +33,6 @@ The easiest way to install it is with pip
 or conda
 
     conda install -c asmeurer catimg
-
-# Example
-
-![](example.png)
 
 # License
 
