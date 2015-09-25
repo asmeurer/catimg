@@ -1,13 +1,14 @@
 language: python
 python:
   - "3.4"
-  - "3.5.0b3"
+  - "3.5"
   - "3.5-dev"
   - "nightly"
 
 matrix:
   allow_failures:
     - python: "3.5-dev"
+    - python: "nightly"
 
 install:
   - "python setup.py install"
