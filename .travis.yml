@@ -12,11 +12,10 @@ matrix:
 
 install:
   - "python setup.py install"
-  - "pip install pyflakes pytest"
+  - "pip install pyflakes"
 
 script:
   - shopt -s extglob globstar
-  - py.test
   - catimg --help
   - catimg --update --verbose
   - catimg > /dev/null
