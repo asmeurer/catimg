@@ -3,7 +3,7 @@ import argparse
 
 from iterm2_tools import display_image_file
 from .imgur import update_img_cache, get_random_image
-from . import __version__
+from . import __version__, __doc__
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
