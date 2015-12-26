@@ -6,7 +6,7 @@ from .imgur import update_img_cache, get_random_image
 from . import __version__, __doc__
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('-f', '--files', nargs='+', metavar='IMAGES', default=(),
                    help='Files to display')
     parser.add_argument('-v', '--verbose', action='store_true', help="Show verbose output")
