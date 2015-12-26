@@ -3,6 +3,7 @@
 
 - Add catimg --version
 - Enable Travis CI
+- Add description to catimg --help
 
 1.1 (2015-08-06)
 ----------------
