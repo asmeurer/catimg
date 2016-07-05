@@ -1,11 +1,11 @@
 package:
   name: catimg
-  version: "1.1"
+  version: "1.1.1"
 
 source:
-  fn: catimg-1.1.tar.gz
-  url: https://pypi.python.org/packages/source/c/catimg/catimg-1.1.tar.gz
-  md5: 5b5f7b3175a320e478a639e96e36a8a5
+  fn: catimg-1.1.1.tar.gz
+  url: https://pypi.python.org/packages/source/c/catimg/catimg-1.1.1.tar.gz
+  md5: 94227c65936a5e4cada9260efe0125c4
 #  patches:
    # List any patch files here
    # - fix.patch

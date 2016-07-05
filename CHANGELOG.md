@@ -1,5 +1,5 @@
-(unreleased)
-------------
+1.1.1 (2016-04-07)
+------------------
 
 - Add catimg --version
 - Enable Travis CI
