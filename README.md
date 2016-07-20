@@ -32,7 +32,7 @@ The easiest way to install it is with pip
 
 or conda
 
-    conda install -c asmeurer catimg
+    conda install -c conda-forge catimg
 
 # License
 
