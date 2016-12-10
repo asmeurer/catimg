@@ -49,6 +49,8 @@ def update_img_cache(verbose=False):
         session = Session()
         os.makedirs(IMG_CACHE, exist_ok=True)
         to_download = {}
+
+        usages = get_usages()
         for item in items.items:
             fn = item.link.rsplit('/', 1)[1]
             path = os.path.join(IMG_CACHE, fn)
@@ -66,12 +68,16 @@ def update_img_cache(verbose=False):
                     print("%s already exists, skipping" % path)
                 continue
             to_download[item] = path
+            # Old images sometimes get bumped, so reset usages so we can see
+            # them again.
+            usages[fn] = 0
 
         with ThreadPoolExecutor(10) as executor:
             for item, path in to_download.items():
                 executor.submit(_download_and_write, item, path, session,
             verbose=verbose)
 
+        write_usages(usages)
     except ImgurClientError as e:
         print("Error: Could not get new images (%s)" % e, file=sys.stderr)
     finally:
@@ -104,12 +110,10 @@ def get_random_image(n=3, delete=True, verbose=False):
     try:
         if verbose:
             print("Max usage:", n)
-        usages = defaultdict(int)
+
         os.makedirs(IMG_CACHE, exist_ok=True)
-        if os.path.exists(USAGES_FILE):
-            with open(USAGES_FILE, 'r') as f:
-                for line in f.read().splitlines():
-                    usages.update({img: int(uses) for img, uses in [line.split()]})
+
+        usages = get_usages()
 
         if verbose:
             print("Usages:", usages)
@@ -138,8 +142,8 @@ def get_random_image(n=3, delete=True, verbose=False):
         if verbose:
             print("New usages:", usages)
             print("Writing usages to %s" % USAGES_FILE)
-        with open(USAGES_FILE, 'w') as f:
-            f.write('\n'.join(' '.join([img, str(usages[img])]) for img in usages))
+
+        write_usages(usages)
 
         return os.path.join(IMG_CACHE, random_file)
     finally:
@@ -147,3 +151,16 @@ def get_random_image(n=3, delete=True, verbose=False):
             os.rmdir(LOCK_PATH)
         except FileNotFoundError:
             pass
+
+def get_usages():
+    usages = defaultdict(int)
+    if os.path.exists(USAGES_FILE):
+        with open(USAGES_FILE, 'r') as f:
+            for line in f.read().splitlines():
+                usages.update({img: int(uses) for img, uses in [line.split()]})
+
+    return usages
+
+def write_usages(usages):
+    with open(USAGES_FILE, 'w') as f:
+        f.write('\n'.join(' '.join([img, str(usages[img])]) for img in usages))
