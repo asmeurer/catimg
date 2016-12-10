@@ -26,7 +26,7 @@ def main():
             update_img_cache(verbose=args.verbose)
             return
         image = get_random_image(delete=args.delete, verbose=args.verbose)
-        if not image and args.download:
+        if image is None and args.download:
             print("No cat images found, downloading...")
             update_img_cache(verbose=args.verbose)
             image = get_random_image(delete=args.delete, verbose=args.verbose)

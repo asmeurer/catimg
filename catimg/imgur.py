@@ -98,9 +98,8 @@ def get_random_image(n=3, delete=True, verbose=False):
                 print("Another process is getting a cat image. Retrying in %s milliseconds." % 2**i*10)
                 time.sleep(2**i/100)
     else:
-        if verbose:
-            print("Could not get lock after %s retries. Giving up." % RETRIES)
-        return
+        print("catimg: could not get lock after %s retries. Giving up." % RETRIES)
+        return False
 
     try:
         if verbose:
