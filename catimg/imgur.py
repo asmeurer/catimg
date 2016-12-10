@@ -119,14 +119,6 @@ def get_random_image(n=3, delete=True, verbose=False):
         if verbose:
             print("Usable files:", usable_files)
 
-        if not usable_files:
-            return None
-
-        random_file = random.choice(list(usable_files))
-        if verbose:
-            print("Random file:", random_file)
-        usages[random_file] += 1
-
         if delete:
             # Shouldn't delete the random_file
             unusable_files = set(files) - usable_files
@@ -134,6 +126,14 @@ def get_random_image(n=3, delete=True, verbose=False):
                 if verbose:
                     print("Removing %s" % os.path.join(IMG_CACHE, f))
                 os.remove(os.path.join(IMG_CACHE, f))
+
+        if not usable_files:
+            return None
+
+        random_file = random.choice(list(usable_files))
+        if verbose:
+            print("Random file:", random_file)
+        usages[random_file] += 1
 
         if verbose:
             print("New usages:", usages)
