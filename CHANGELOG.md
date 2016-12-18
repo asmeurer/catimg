@@ -1,3 +1,12 @@
+1.2   (..........)
+----------------
+- Don't ignore the --no-delete option.
+- Print better message when run out of retries.
+- Delete images even if no usable ones were found.
+- Reset usages for downloaded images. Now the same image that was seen before
+  can be downloaded again if it makes it to the top of the imgur results
+  again.
+
 1.1.1 (2016-04-07)
 ------------------
 
